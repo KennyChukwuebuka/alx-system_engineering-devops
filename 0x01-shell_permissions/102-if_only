@@ -1,2 +1,2 @@
 #!/bin/bash
-Chown __reference guillaume=betty hello
+chown __reference guillaume=betty hello
