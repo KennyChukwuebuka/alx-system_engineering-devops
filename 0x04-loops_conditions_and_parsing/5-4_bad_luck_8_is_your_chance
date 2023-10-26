@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Use while loop to iterate 1 to 10
 
 count=1
@@ -13,13 +12,13 @@ do
 
     then
 
-        echo "bad Luck"
+        echo "bad luck"
 
     elif [ $count -eq 8 ]
 
     then
 
-        echo "good Luck"
+        echo "good luck"
 
     else
 
