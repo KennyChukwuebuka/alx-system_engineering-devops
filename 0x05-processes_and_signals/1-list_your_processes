@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Script that displays a list of currently running processes
+
+echo "USER       PID  PPID  PGID   TTY     COMMAND"
+
+ps auxf | awk '{print $1, $2, $3, $4, $7, $11}' | sed 's/ \S*$//'
