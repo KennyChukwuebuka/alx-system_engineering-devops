@@ -21,9 +21,10 @@ Read or watch:
 ## Learning Objectives:bulb:
 What you should learn from this project:
 
-* What it is
-* How many layers it has
-* How it is organized
+* What is a LAN
+* What is a WAN
+* What is the Internet
+* TCP/UDP
 
 ---
 
