@@ -6,4 +6,3 @@ exec { 'kill_killmenow_process':
   onlyif      => 'pgrep killmenow',
   refreshonly => true,
 }
-
