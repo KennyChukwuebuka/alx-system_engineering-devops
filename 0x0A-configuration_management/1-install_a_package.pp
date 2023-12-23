@@ -1,12 +1,25 @@
 # Using Puppet, install flask from pip3.
 
-package { 'python3-pip':
-  ensure => installed,
+# Install Python 3.8.10
+package { 'python':
+  ensure => present,
 }
 
-exec { 'install_flask':
-  command => '/usr/bin/pip3 install Flask==2.1.0',
-  path    => ['/usr/bin'],
-  unless  => '/usr/bin/pip3 show Flask | grep -q "Version: 2.1.0"',
-  require => Package['python3-pip'],
+# Install pip
+package { 'python3-pip':
+  ensure => present,
+}
+
+# Install Flask 2.1.0
+package { 'flask':
+  ensure   => '2.1.0',
+  provider => pip3,
+  require  => Package['python3-pip'],
+}
+
+# Install Werkzeug 2.1.1
+package { 'werkzeug':
+  ensure   => '2.1.1',
+  provider => pip,
+  require  => Package['python3-pip'],
 }
