@@ -1,4 +1,4 @@
-# using puppet to make changes to config file
+# using puppet to make changes to config file advance task
 
 file_line { 'Turn off passwd auth':
  ensure =>  'present',
