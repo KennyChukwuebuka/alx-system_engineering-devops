@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Write a Bash script that transfers a file from our client to a server
+
+# Check the number of parameters
+if [ $# -lt 3 ]; then
+  echo "Usage: $0 PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+  exit 1
+fi
+
+# Read the parameters
+FILE_PATH="$1"
+SERVER_IP="$2"
+USERNAME="$3"
+SSH_KEY_PATH="$4"
+
+# Transfer the file from client to server using scp
+scp -o StrictHostKeyChecking=no -i "$SSH_KEY_PATH" "$FILE_PATH" "$USERNAME@$SERVER_IP:~/"
+
+# Optional: Verify the file transfer
+ssh -o StrictHostKeyChecking=no -i "$SSH_KEY_PATH" "$USERNAME@$SERVER_IP" ls ~/
+
+# Remote execution
+ssh -o StrictHostKeyChecking=no -i "$SSH_KEY_PATH" "$USERNAME@$SERVER_IP" ls ~/
+
+# Create a file named some_page.html
+ssh -o StrictHostKeyChecking=no -i "$SSH_KEY_PATH" "$USERNAME@$SERVER_IP" touch ~/some_page.html
+
+# Execute the 0-transfer_file script
+ssh -o StrictHostKeyChecking=no -i "$SSH_KEY_PATH" "$USERNAME@$SERVER_IP" ./0-transfer_file.sh "$FILE_PATH" "$SERVER_IP" "$USERNAME" "$SSH_KEY_PATH"
+
+# Remote execution to verify the file transfer
+ssh -o StrictHostKeyChecking=no -i "$SSH_KEY_PATH" "$USERNAME@$SERVER_IP" ls ~/
+
