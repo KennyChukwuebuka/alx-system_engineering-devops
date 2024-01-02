@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Install nginx web server
+
+# Update package list
+sudo apt-get update
+
+# Install Nginx
+sudo apt-get install nginx -y
+
+# Create a custom HTML file
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+
+# Set permissions for the HTML file
+sudo chown www-data:www-data /var/www/html/index.html
+
+# Restart Nginx
+sudo service nginx restart
+
