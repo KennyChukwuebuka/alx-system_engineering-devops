@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+let "z=5**3"
+echo "z = $z"
+let 
