@@ -8,11 +8,16 @@ sudo apt -y update
 sudo apt -y install nginx
 
 # Create a custom HTML file
-echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+sh -c 'echo "Hello World!" | tee /var/www/html/index.html'
+sh -c 'echo "server {
+    listen 80;
+    server_name localhost;
 
-# Set permissions for the HTML file
-sudo chown www-data:www-data /var/www/html/index.html
+    location / {
+        root /var/www/html;
+        index index.html;
+    }
+}" >> /etc/nginx/sites-available/default'
 
 # Restart Nginx
 sudo service nginx restart
-
