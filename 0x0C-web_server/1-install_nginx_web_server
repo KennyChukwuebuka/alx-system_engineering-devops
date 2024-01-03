@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
 # Install nginx web server
 
-# Update package list
 sudo apt -y update
-
-# Install Nginx
 sudo apt -y install nginx
-
-# Create a custom HTML file
 sh -c 'echo "Hello World!" | tee /var/www/html/index.html'
 sh -c 'echo "server {
     listen 80;
@@ -18,6 +13,4 @@ sh -c 'echo "server {
         index index.html;
     }
 }" >> /etc/nginx/sites-available/default'
-
-# Restart Nginx
 sudo service nginx restart
