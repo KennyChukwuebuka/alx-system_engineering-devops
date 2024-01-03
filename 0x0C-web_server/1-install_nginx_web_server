@@ -2,10 +2,10 @@
 # Install nginx web server
 
 # Update package list
-sudo apt-get update
+sudo apt -y update
 
 # Install Nginx
-sudo apt-get install nginx -y
+sudo apt -y install nginx
 
 # Create a custom HTML file
 echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
