@@ -1,40 +1,28 @@
 #!/usr/bin/env bash 
 # Redirection
 
-# Install Nginx if not already installed
-if ! command -v nginx &> /dev/null
-then
-    sudo apt update
-    sudo apt install -y nginx
-fi
+sudo apt-get update
+sudo apt-get -y install nginx
+
+sudo sh -c 'echo "Hello World!" > /var/www/html/index.html'
 
 # Create a configuration file for the redirection
-sudo bash -c 'cat <<EOF > /etc/nginx/sites-available/redirect_config
+sudo tee /etc/nginx/sites-available/default > /dev/null <<EOF
 server {
-    listen 80;
-    listen [::]:80;
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+    server_name _;
 
-    server_name 54.82.179.102;
-
-    location /redirect_me {
-        return 301 https://google.com/new_page;
-    }
-
-    # Additional server configurations can be added here if needed
-
-    # Disallow access to hidden files
-    location ~ /\. {
-        deny all;
-        access_log off;
-        log_not_found off;
+    location / {
+        if (\$request_uri ~* "redirect_me") {
+            rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
+        }
     }
 }
-EOF'
-
-# Enable the configuration by creating a symbolic link
-sudo ln -s /etc/nginx/sites-available/redirect_config /etc/nginx/sites-enabled/
+EOF
 
 # Check Nginx configuration and restart
-sudo nginx -t
-sudo systemctl restart nginx
+sudo nginx -t && sudo systemctl restart nginx
 
