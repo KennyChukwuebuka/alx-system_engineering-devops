@@ -6,7 +6,7 @@ sudo apt-get -y install nginx
 
 sudo sh -c 'echo "Hello World!" > /var/www/html/index.html'
 
-# Create a configuration file for the redirection
+# Create an configuration file for the redirection
 sudo tee /etc/nginx/sites-available/default > /dev/null <<EOF
 server {
     listen 80 default_server;
