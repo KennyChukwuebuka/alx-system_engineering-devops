@@ -1,0 +1,5 @@
+#!/bin/use/env bash
+# Nginx likes port 22
+
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled
+sudo service nginx restart
