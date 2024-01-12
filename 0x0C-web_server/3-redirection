@@ -1,28 +1,28 @@
-#!/usr/bin/env bash 
-# Redirection
+#!/usr/bin/env bash
+#script that configures a new Ubuntu machine to respect above requirements
+hostname=$(hostname)
+sudo apt-get update -y
+sudo apt-get install nginx -y
+sudo ufw allow 'Nginx HTTP'
 
-sudo apt-get update
-sudo apt-get -y install nginx
+echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
 
-sudo sh -c 'echo "Hello World!" > /var/www/html/index.html'
-
-# Create an configuration file for the redirection
-sudo tee /etc/nginx/sites-available/default > /dev/null <<EOF
-server {
+echo "server {
     listen 80 default_server;
     listen [::]:80 default_server;
     root /var/www/html;
     index index.html index.htm index.nginx-debian.html;
-    server_name _;
-
-    location / {
-        if (\$request_uri ~* "redirect_me") {
-            rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
-        }
+    servername ;
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=3lFkDc6dFoY;
     }
-}
-EOF
+    error_page 404 /custom_404.html;
+    location = /custom_404.html {
+        root /var/www/html;
+        internal;
+    }
+    add_header X-Served-By $hostname;
+}" | sudo tee /etc/nginx/sites-available/default
 
-# Check Nginx configuration and restart
-sudo nginx -t && sudo systemctl restart nginx
-
+sudo service nginx restart
