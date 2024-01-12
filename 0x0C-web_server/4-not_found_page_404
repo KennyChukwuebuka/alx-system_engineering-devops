@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 404 not found page setup for Nginx
+# 404 not found page setup for Nginx server
 
 # Install Nginx if not already installed
 sudo apt-get update
