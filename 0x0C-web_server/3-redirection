@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#script that configures a new Ubuntu machine to respect above requirements
+#script that configures a new Ubuntu machine
 hostname=$(hostname)
 sudo apt-get update -y
 sudo apt-get install nginx -y
