@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# script that is shorter
+
+if [ $# -eq 0 ]
+then
+  echo "Usage: $0 <username>"
+  exit 1
+fi
+
+sudo -u $1 whoami
+
