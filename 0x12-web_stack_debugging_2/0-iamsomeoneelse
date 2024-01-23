@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# a Bash script that accepts one argument
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <username>"
+    exit 1
+fi
+
+# Get the username from the command line argument
+username=$1
+
+# Run the whoami command for the specified user
+sudo -u "$username" whoami
+
+# If you don't have sudo access, you can use the following alternative:
+# su $username -c "whoami"
+
