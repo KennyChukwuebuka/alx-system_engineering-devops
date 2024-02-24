@@ -1,0 +1,35 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    # Use IP of server 
+    server_name 100.25.192.224
+
+    # Custome HTTP
+    add_header X-Served-By 419818-web-01;
+
+    # Serve /airbnb-onepage
+    location /airbnb-onepage {
+           proxy_pass http://localhost:5000/airbnb-onepage;
+           proxy_redirect off;
+    }
+
+    # Serve /number_odd_or_even/
+    location /airbnb-dynamic/number_odd_or_even/(\d+)/ {
+        proxy_pass http://localhost:5001/airbnb-dynamic/number_odd_or_even/$1;
+        proxy_redirect off;
+    }
+
+    # root /var/www/html;
+    # index index.html index.htm index.nginx-debian.html;
+    # servername ;
+    # location /redirect_me {
+    #   return 301 https://www.youtube.com/watch?v=3lFkDc6dFoY;
+    # }
+
+    error_page 404 /custom_404.html;
+    location = /custom_404.html {
+        root /var/www/html;
+        internal;
+    }
+}
